@@ -15,19 +15,24 @@ spring:
     name: catalog-service
   lifecycle:
     timeout-per-shutdown-phase: 15s
-#  config:
-#    import: "optional:configserver:"
-#  cloud:
-#    config:
-#      uri: http://127.0.0.1:8888
-#      request-connect-timeout: 5000
-#      request-read-timeout: 5000
-#      fail-fast: true
-#      retry:
-#        max-attempts: 6
-#        initial-interval: 1000
-#        max-interval: 2000
-#        multiplier: 1.1
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:9090/realms/PolarBookshop
+  #  config:
+  #    import: "optional:configserver:"
+  #  cloud:
+  #    config:
+  #      uri: http://127.0.0.1:8888
+  #      request-connect-timeout: 5000
+  #      request-read-timeout: 5000
+  #      fail-fast: true
+  #      retry:
+  #        max-attempts: 6
+  #        initial-interval: 1000
+  #        max-interval: 2000
+  #        multiplier: 1.1
   datasource:
     username: user
     password: password
@@ -45,4 +50,30 @@ management:
   endpoints:
     web:
       exposure:
-        include: refresh
+        include: refresh, health, prometheus, flyway, info, heapdump
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+      os:
+        enabled: true
+  endpoint:
+    health:
+      show-details: always
+      show-components: always
+      probes:
+        enabled: true
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name},%X{trace_id},%X{span_id}]"
+
+info:
+  system: Polar Bookshop
+
+
+

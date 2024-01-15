@@ -19,3 +19,6 @@ $ echo $?
 
 
 For full usage and installation instructions see [kubeval.com](https://kubeval.com/).
+
+#building image for
+./gradlew bootBuildImage --builder ghcr.io/thomasvitale/java-builder-arm64

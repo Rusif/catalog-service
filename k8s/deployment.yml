@@ -47,10 +47,10 @@ spec:
 #            timeoutSeconds: 5
 #            initialDelaySeconds: 60
 #            periodSeconds: 10
-#          volumeMounts:
-#            - name: catalog-config-volume
-#              mountPath: /workspace/config
-#      volumes:
-#        - name: catalog-config-volume
-#          configMap:
-#            name: catalog-config
+          volumeMounts:
+            - name: catalog-config-volume
+              mountPath: /workspace/config
+      volumes:
+        - name: catalog-config-volume
+          configMap:
+            name: catalog-config
